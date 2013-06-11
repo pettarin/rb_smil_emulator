@@ -1,11 +1,11 @@
-# rb_smil_emulator.js (v. 1.4)
+# rb_smil_emulator.js 
 
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
 * Version: 1.4
 * Date: 2013-06-10
-* Author: Alberto Pettarin ([website, contact information](http://www.albertopettarin.it/))
+* Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
 This JavaScript enables the tap-to-play function on those platforms
@@ -26,14 +26,16 @@ in modern browsers as well.
 
 ## Usage
 
-In your XHTML page (say, `page.xhtml`) you must add:
+In your XHTML page (say, `page.xhtml`) you must add the following code blocks.
 
-* HEAD:
+In the `<head>`:
 ```HTML
 <script type="text/javascript" src="path/to/rb_smil_emulator.js"></script>
 <script type="text/javascript" src="path/to/page.smil.js"></script>
 ```
-* AS LAST ELEMENT OF BODY (see below for optional parameters):
+
+As the last element of `<body>`
+(see below for optional parameters in the form `{k1: p1, k2: p2, k3: p3}`):
 ```HTML
 <script type="text/javascript">
 //<![CDATA[
@@ -70,15 +72,15 @@ sorted according to their begin time.
 Fragment IDs might be arbitrary (but unique) strings.
 
 Optional parameter keys include:
-* active_fragment_class_name
-* paused_fragment_class_name
-* autostart_audio
-* autostart_wait_event
-* autoturn_page
-* single_fragment
-* outside_taps_clear
-* outside_taps_can_resume
-* outside_taps_threshold
+* `active_fragment_class_name`
+* `paused_fragment_class_name`
+* `autostart_audio`
+* `autostart_wait_event`
+* `autoturn_page`
+* `single_fragment`
+* `outside_taps_clear`
+* `outside_taps_can_resume`
+* `outside_taps_threshold`
 
 The meaning of the above options, their type and default value
 are described in the comment right above `init()` in the source code.
@@ -91,7 +93,7 @@ Please see the `src/` directory.
 
 ## Examples
 
-A minimal (but working) example can be found in the `minimal` directory.
+A minimal (but working) example can be found in the `minimal/` directory.
 
 A working full Audio-eBook example can be found online at [Smuuks web site](http://www.smuuks.it/index.php/en/projects/the-curious-case-of-benjamin-button).
 
@@ -113,7 +115,7 @@ A working full Audio-eBook example can be found online at [Smuuks web site](http
 * Thanks to _Giulio Cesare Solaroli_ for a useful discussion about JS
 * Thanks to _torazaburo_ for answering my question about [how to make iBook turn page with JS](http://stackoverflow.com/questions/16922631/make-ibooks-turn-page-in-reflow-mode-with-javascript-embedded-in-the-displayed)
 
-Please feel free to send me your feedback about this JS code
+Please feel free to send me your feedback about this project
 (my email address can be found in the source code header),
 and/or fork and improve it!
 
