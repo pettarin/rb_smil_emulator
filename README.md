@@ -95,7 +95,9 @@ Please see the `src/` directory.
 
 A minimal (but working) example can be found in the `minimal/` directory.
 
-A working full Audio-eBook example can be found online at [Smuuks web site](http://www.smuuks.it/index.php/en/projects/the-curious-case-of-benjamin-button).
+Two full Audio-eBook examples can be found online at [Smuuks web site](http://www.smuuks.it/index.php/en/):
+* _The Curious Case of Benjamin Button_, by F. Scott Fitzgerald, in English, 1h audio/645 SMIL fragments: [here](http://www.smuuks.it/index.php/en/projects/the-curious-case-of-benjamin-button)
+* _Cuore_, by E. De Amicis, in Italian, 9h audio/6,762 SMIL fragments: [here](http://www.smuuks.it/index.php/it/progetti/cuore).
 
 
 ## TODO List
