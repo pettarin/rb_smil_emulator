@@ -4,7 +4,7 @@
    <par id="p000001"><text src="p001.xhtml#f000001"/><audio clipBegin="0:00:00.000" clipEnd="0:00:01.480" src="01_BenjaminButton_Begin.mp3"/></par>
    <par id="p000002"><text src="p001.xhtml#f000002"/><audio clipBegin="0:00:01.480" clipEnd="0:00:03.999" src="01_BenjaminButton_Begin.mp3"/></par>
    <par id="p000003"><text src="p001.xhtml#f000003"/><audio clipBegin="0:00:03.999" clipEnd="0:00:07.759" src="01_BenjaminButton_Begin.mp3"/></par>
-   <par id="p000004"><text src="p001.xhtml#f000004"/><audio clipBegin="0:00:07.559" clipEnd="0:00:10.900" src="01_BenjaminButton_Begin.mp3"/></par>
+   <par id="p000004"><text src="p001.xhtml#f000004"/><audio clipBegin="0:00:07.759" clipEnd="0:00:10.900" src="01_BenjaminButton_Begin.mp3"/></par>
    <par id="p000005"><text src="p001.xhtml#f000005"/><audio clipBegin="0:00:10.900" clipEnd="0:00:13.960" src="01_BenjaminButton_Begin.mp3"/></par>
    <par id="p000006"><text src="p001.xhtml#f000006"/><audio clipBegin="0:00:13.960" clipEnd="0:00:17.030" src="01_BenjaminButton_Begin.mp3"/></par>
   </seq>
