@@ -3,8 +3,8 @@
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
-* Version: 1.4
-* Date: 2013-06-10
+* Version: 1.5
+* Date: 2013-08-21
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
@@ -103,11 +103,11 @@ Two full Audio-eBook examples can be found online at [Smuuks web site](http://ww
 ## TODO List
 
 * Support generic SMIL fragments (not necessarily contiguous nor spanning the entire audio track)
-* Integration with existing `<audio>` (or `<video>`) element (unfortunately seeking seems broken in iBooks)
-* Auto turn page (without flickering in iBooks and without messing Readium up)
-* Selectively include/exclude the reading system (e.g., by using `navigator.epubReadingSystem`)
+* Integration with existing `<audio>` (or `<video>`) element (unfortunately at the moment seeking seems broken in iBooks)
+* Auto turn page (without flickering in iBooks and without messing Readium page layout up)
+* Selectively include/exclude supported reading systems (e.g., by using `navigator.epubReadingSystem`)
 * More flexible, user-customizable interaction between user click/touch and audio rendition behaviour
-* Avoid collision of two audio sources in iBooks
+* Avoid collision of two audio sources in iBooks (if possible at all)
 * Reusing existing SMIL libraries, like `timesheet.js`
 
 

@@ -1,8 +1,8 @@
 /*
 
 File name: rb_smil_emulator.js
-Version: 1.4
-Date: 2013-06-10
+Version: 1.5
+Date: 2013-08-21
 Author: Alberto Pettarin (alberto AT albertopettarin DOT it)
 Description: this JS provides Media Overlay (SMIL) support in iBooks for EPUB 3 reflowable eBooks
 
@@ -224,8 +224,7 @@ Fragment IDs might be arbitrary (but unique) strings.
     on_touch_event: function(element) {
       var rb_smil_emulator = window.rb_smil_emulator;
       var current_idx = rb_smil_emulator.current_idx;
-      var id = element.target.id;
-      var touched_idx = rb_smil_emulator.smil_ids.indexOf(id);
+      var touched_idx = rb_smil_emulator.check_id(element.target);
       if (touched_idx > -1) {
         // the touched element is a SMIL fragment
         rb_smil_emulator.current_number_outside_taps = 0;
@@ -378,6 +377,28 @@ Fragment IDs might be arbitrary (but unique) strings.
         active_fragment.classList.remove(rb_smil_emulator.paused_fragment_class_name);
         active_fragment.classList.remove(rb_smil_emulator.active_fragment_class_name);
       }
+    },
+
+    /*
+       unless the touched element is an <a> element,
+       check whether it has a SMIL id;
+       if not, check recursively the parent element
+       TODO: user-selectable behavior for <a> elements
+    */
+    check_id: function(element) {
+      var type = element.nodeName;
+      if (type.toLowerCase() == "a") {
+        return -1;
+      }
+      var id = element.id;
+      while (window.rb_smil_emulator.smil_ids.indexOf(id) == -1) {
+        element = element.parentNode;
+        if (element == null) {
+          return -1;
+        }
+        id = element.id;  
+      }
+      return window.rb_smil_emulator.smil_ids.indexOf(id);
     }
 
   }; // END of rb_smil_emulator
