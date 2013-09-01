@@ -3,8 +3,8 @@
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
-* Version: 1.5
-* Date: 2013-08-21
+* Version: 1.7
+* Date: 2013-09-01
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
@@ -15,13 +15,14 @@ that do not properly support the EPUB 3 Media Overlay specification
 Please note that this JS script is independent from the integrated audio controls
 and the regular Media Overlay/SMIL controls that your reading system might provide,
 and it might conflict with them.
+Use it at your own risk!
 If you think that tap-to-play is a useful feature,
 I request you to urge the developers of your favourite reading system to implement
 the official EPUB 3 Media Overlay specification.
 
 Although primarily developed for iBooks, it works in Readium
-(to which it adds the unimplemented tap-to-play function) and
-in modern browsers as well.
+(to which it adds the still not implemented tap-to-play function)
+and in modern browsers (e.g., Chrome) as well.
 
 
 ## Usage
@@ -81,6 +82,9 @@ Optional parameter keys include:
 * `outside_taps_clear`
 * `outside_taps_can_resume`
 * `outside_taps_threshold`
+* `associated_events`
+* `ignore_taps_on_a_elements`
+* `allowed_reading_systems`
 
 The meaning of the above options, their type and default value
 are described in the comment right above `init()` in the source code.
@@ -103,9 +107,9 @@ Two full Audio-eBook examples can be found online at [Smuuks web site](http://ww
 ## TODO List
 
 * Support generic SMIL fragments (not necessarily contiguous nor spanning the entire audio track)
+* Support multiple highlighted elements at the same time
 * Integration with existing `<audio>` (or `<video>`) element (unfortunately at the moment seeking seems broken in iBooks)
 * Auto turn page (without flickering in iBooks and without messing Readium page layout up)
-* Selectively include/exclude supported reading systems (e.g., by using `navigator.epubReadingSystem`)
 * More flexible, user-customizable interaction between user click/touch and audio rendition behaviour
 * Avoid collision of two audio sources in iBooks (if possible at all)
 * Reusing existing SMIL libraries, like `timesheet.js`

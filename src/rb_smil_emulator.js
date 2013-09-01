@@ -1,10 +1,10 @@
 /*
 
 File name: rb_smil_emulator.js
-Version: 1.5
-Date: 2013-08-21
+Version: 1.7
+Date: 2013-09-01
 Author: Alberto Pettarin (alberto AT albertopettarin DOT it)
-Description: this JS provides Media Overlay (SMIL) support in iBooks for EPUB 3 reflowable eBooks
+Description: this JS provides Media Overlay (SMIL) support for EPUB 3 reflowable eBooks
 
 
 License
@@ -95,6 +95,9 @@ Fragment IDs might be arbitrary (but unique) strings.
     outside_taps_clear: false,
     outside_taps_can_resume: false,
     outside_taps_threshold: 1,
+    associated_events: ['click', 'touchend'],
+    ignore_taps_on_a_elements: true,
+    allowed_reading_systems: ['ALL'],
     // END parameters
 
     // BEGIN fields
@@ -109,9 +112,6 @@ Fragment IDs might be arbitrary (but unique) strings.
     smil_data: smil_data,
     audio: null,
     timer: null,
-    
-    // iBooks fires touchend, Readium fires mouseup
-    touch_event: ('createTouch' in doc) ? 'touchend' : 'mouseup',
     // END fields
 
     /*
@@ -157,18 +157,23 @@ Fragment IDs might be arbitrary (but unique) strings.
             Type: integer
             Default value: 1
             Description: number of taps outside SMIL fragments required to stop/pause; set to 0 to disable
+        * associated_events
+            Type: array of strings
+            Default value: ['click', 'touchend']
+            Description: start/pause/stop SMIL rendition on the occurrence of the events whose names are listed here
+        * ignore_taps_on_a_elements
+            Type: boolean
+            Default value: true
+            Description: set to true if you want tap(s) on <a> elements to be ignored, false otherwise
+        * allowed_reading_systems
+            Type: array of strings
+            Default value: ['ALL']
+            Description: execute SMIL emulation only if navigator.epubReadingSystem.name (lower-cased) is listed here (e.g., 'ibooks', 'readium');
+                         set to 'ALL' to allow any reading system (even if it does not expose navigator.epubReadingSystem)
     */
     init: function(audio_file, parameters) {
       var rb_smil_emulator = window.rb_smil_emulator;
-      
-      // create <audio> element
-      var audio = document.createElement('audio');
-      audio.id = rb_smil_emulator.rb_audio_id;
-      audio.src = audio_file;
-      audio.classList.add(rb_smil_emulator.rb_audio_class_name);
-      doc.body.appendChild(audio);
-      rb_smil_emulator.audio = audio;
-     
+
       // store parameters
       if ("active_fragment_class_name" in parameters) {
         rb_smil_emulator.active_fragment_class_name = parameters["active_fragment_class_name"];
@@ -203,14 +208,50 @@ Fragment IDs might be arbitrary (but unique) strings.
         }
         */
       }
-     
+      if ("associated_events" in parameters) {
+        rb_smil_emulator.associated_events = parameters["associated_events"];
+      }
+      if ("ignore_taps_on_a_elements" in parameters) {
+        rb_smil_emulator.ignore_taps_on_a_elements = parameters["ignore_taps_on_a_elements"];
+      }
+      if ("allowed_reading_systems" in parameters) {
+        rb_smil_emulator.allowed_reading_systems = parameters["allowed_reading_systems"];
+      }
+
+      // check that the current reading system is allowed: if not, abort
+      var abort = true;
+      var current_reading_system = '';
+      if ((navigator) && (navigator.epubReadingSystem) && (navigator.epubReadingSystem.name)) {
+        current_reading_system = navigator.epubReadingSystem.name.toLowerCase();
+      }
+      for (var i = 0; i < rb_smil_emulator.allowed_reading_systems.length; ++i) {
+        var ars = rb_smil_emulator.allowed_reading_systems[i];
+        if ((ars == 'ALL') || (ars == current_reading_system)) {
+          abort = false;
+          break;
+        }
+      }
+      if (abort) {
+        return false;
+      }
+
+      // create <audio> element
+      var audio = document.createElement('audio');
+      audio.id = rb_smil_emulator.rb_audio_id;
+      audio.src = audio_file;
+      audio.classList.add(rb_smil_emulator.rb_audio_class_name);
+      doc.body.appendChild(audio);
+      rb_smil_emulator.audio = audio;
+
       // trick to force loading the audio file
       audio.play();
       audio.pause();
 
       // add listener to catch touch events
-      doc.addEventListener(rb_smil_emulator.touch_event, rb_smil_emulator.on_touch_event);
-      
+      for (var i = 0; i < rb_smil_emulator.associated_events.length; ++i) {
+        doc.addEventListener(rb_smil_emulator.associated_events[i], rb_smil_emulator.on_touch_event);
+      }
+
       // if autostart_audio, start audio at first fragment
       // as soon as autostart_wait_event occurs
       if (rb_smil_emulator.autostart_audio) {
@@ -380,25 +421,27 @@ Fragment IDs might be arbitrary (but unique) strings.
     },
 
     /*
-       unless the touched element is an <a> element,
-       check whether it has a SMIL id;
-       if not, check recursively the parent element
-       TODO: user-selectable behavior for <a> elements
+       check whether the touched element has a SMIL id,
+       if not, check recursively the parent element;
+       if the touched element is an <a>,
+       and the user set ignore_taps_on_a_elements=True,
+       then ignore the event
     */
     check_id: function(element) {
+      var rb_smil_emulator = window.rb_smil_emulator;
       var type = element.nodeName;
-      if (type.toLowerCase() == "a") {
+      if ((type.toLowerCase() == "a") && (rb_smil_emulator.ignore_taps_on_a_elements)) {
         return -1;
       }
       var id = element.id;
-      while (window.rb_smil_emulator.smil_ids.indexOf(id) == -1) {
+      while (rb_smil_emulator.smil_ids.indexOf(id) == -1) {
         element = element.parentNode;
         if (element == null) {
           return -1;
         }
         id = element.id;  
       }
-      return window.rb_smil_emulator.smil_ids.indexOf(id);
+      return rb_smil_emulator.smil_ids.indexOf(id);
     }
 
   }; // END of rb_smil_emulator
