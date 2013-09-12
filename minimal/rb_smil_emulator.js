@@ -1,8 +1,8 @@
 /*
 
 File name: rb_smil_emulator.js
-Version: 1.7
-Date: 2013-09-01
+Version: 1.8
+Date: 2013-09-12
 Author: Alberto Pettarin (alberto AT albertopettarin DOT it)
 Description: this JS provides Media Overlay (SMIL) support for EPUB 3 reflowable eBooks
 
@@ -112,6 +112,8 @@ Fragment IDs might be arbitrary (but unique) strings.
     smil_data: smil_data,
     audio: null,
     timer: null,
+    previous_fragment_offsetTop: -1,
+    current_reading_system: '',
     // END fields
 
     /*
@@ -139,8 +141,7 @@ Fragment IDs might be arbitrary (but unique) strings.
             Type: boolean
             Default value: false
             Description: set to true if you want this JS to reset location.href to the active element id only when page changes, false otherwise
-            WARNING: enabling this option causes a page flip effect at each SMIL transition (nasty!)
-            WARNING: enabling this option causes Readium to behave erratically (extremely nasty!)
+            WARNING: this feature is experimental, and it is enabled on iBooks only: on other Reading Systems it has no effect 
         * single_fragment
             Type: boolean
             Default value: false
@@ -201,12 +202,6 @@ Fragment IDs might be arbitrary (but unique) strings.
       }
       if ("autoturn_page" in parameters) {
         rb_smil_emulator.autoturn_page = parameters["autoturn_page"];
-        /*
-        NOTE: uncomment if you want to prevent Readium from breaking the "page" layout
-        if ((navigator) && (navigator.epubReadingSystem) && (navigator.epubReadingSystem.name.indexOf("Readium") > -1)) {
-          rb_smil_emulator.autoturn_page = false;
-        }
-        */
       }
       if ("associated_events" in parameters) {
         rb_smil_emulator.associated_events = parameters["associated_events"];
@@ -220,13 +215,12 @@ Fragment IDs might be arbitrary (but unique) strings.
 
       // check that the current reading system is allowed: if not, abort
       var abort = true;
-      var current_reading_system = '';
       if ((navigator) && (navigator.epubReadingSystem) && (navigator.epubReadingSystem.name)) {
-        current_reading_system = navigator.epubReadingSystem.name.toLowerCase();
+        rb_smil_emulator.current_reading_system = navigator.epubReadingSystem.name.toLowerCase();
       }
       for (var i = 0; i < rb_smil_emulator.allowed_reading_systems.length; ++i) {
         var ars = rb_smil_emulator.allowed_reading_systems[i];
-        if ((ars == 'ALL') || (ars == current_reading_system)) {
+        if ((ars == 'ALL') || (ars == rb_smil_emulator.current_reading_system)) {
           abort = false;
           break;
         }
@@ -372,7 +366,34 @@ Fragment IDs might be arbitrary (but unique) strings.
       // please read the WARNING(s) about this feature
       // in the init() documentation
       if (rb_smil_emulator.autoturn_page) {
-        location.href = "#" + rb_smil_emulator.smil_ids[idx];
+        // in principle this should work everywhere,
+        // but for example in Readium it breaks the pagination
+        // hence this feature is enabled for in iBooks only
+        // location.href = "#" + rb_smil_emulator.smil_ids[idx];
+        if (rb_smil_emulator.current_reading_system == "ibooks") {
+          var current_fragment_offsetTop = doc.getElementById(rb_smil_emulator.smil_ids[idx]).offsetTop;
+          var current_fragment_page = Math.floor(current_fragment_offsetTop / window.innerHeight);
+          var previous_fragment_page = Math.floor(rb_smil_emulator.previous_fragment_offsetTop / window.innerHeight);
+
+          var orientation = window.orientation;
+          var left = doc.getElementById(rb_smil_emulator.smil_ids[idx]).getBoundingClientRect().left;
+          var right = doc.getElementById(rb_smil_emulator.smil_ids[idx]).getBoundingClientRect().right;
+
+          if (previous_fragment_page > -1) {
+            if ((orientation == 0) || (orientation == 180)) {
+              // portrait
+              if (current_fragment_page > previous_fragment_page) {
+                location.href = "#" + rb_smil_emulator.smil_ids[idx];
+              }
+            } else {
+              // landscape
+              if ((left > window.innerWidth) && (right> window.innerWidth)) {
+                location.href = "#" + rb_smil_emulator.smil_ids[idx];
+              }
+            }
+          }
+          rb_smil_emulator.previous_fragment_offsetTop = current_fragment_offsetTop;
+        }
       }
       
       var smil_data = rb_smil_emulator.smil_data;

@@ -3,8 +3,8 @@
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
-* Version: 1.7
-* Date: 2013-09-01
+* Version: 1.8
+* Date: 2013-09-12
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
@@ -109,10 +109,10 @@ Two full Audio-eBook examples can be found online at [Smuuks web site](http://ww
 * Support generic SMIL fragments (not necessarily contiguous nor spanning the entire audio track)
 * Support multiple highlighted elements at the same time
 * Integration with existing `<audio>` (or `<video>`) element (unfortunately at the moment seeking seems broken in iBooks)
-* Auto turn page (without flickering in iBooks and without messing Readium page layout up)
 * More flexible, user-customizable interaction between user click/touch and audio rendition behaviour
-* Avoid collision of two audio sources in iBooks (if possible at all)
-* Reusing existing SMIL libraries, like `timesheet.js`
+* Avoid collision of two audio sources in iBooks (if possible at all --- right now it does not seem possible)
+* Use/integrate existing SMIL libraries (e.g., `timesheet.js`)
+* Load next chapter upon the end of the current
 
 
 ## Acknowledgments
@@ -120,6 +120,7 @@ Two full Audio-eBook examples can be found online at [Smuuks web site](http://ww
 * I was inspired by the source code of [Readium](http://readium.org/) and [Timesheet.js](http://wam.inrialpes.fr/timesheets/)
 * Thanks to _Giulio Cesare Solaroli_ for a useful discussion about JS
 * Thanks to _torazaburo_ for answering my question about [how to make iBook turn page with JS](http://stackoverflow.com/questions/16922631/make-ibooks-turn-page-in-reflow-mode-with-javascript-embedded-in-the-displayed)
+* Thanks to _Frank Chen_ for providing a sample JS code incorporated into the current code for the autoturnpage option
 
 Please feel free to send me your feedback about this project
 (my email address can be found in the source code header),
