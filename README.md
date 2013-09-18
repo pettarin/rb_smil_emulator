@@ -3,8 +3,8 @@
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
-* Version: 1.8
-* Date: 2013-09-12
+* Version: 1.9
+* Date: 2013-09-19
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
@@ -85,6 +85,7 @@ Optional parameter keys include:
 * `associated_events`
 * `ignore_taps_on_a_elements`
 * `allowed_reading_systems`
+* `hide_elements`
 
 The meaning of the above options, their type and default value
 are described in the comment right above `init()` in the source code.
