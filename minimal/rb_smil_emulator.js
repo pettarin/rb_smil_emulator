@@ -1,8 +1,8 @@
 /*
 
 File name: rb_smil_emulator.js
-Version: 1.8
-Date: 2013-09-12
+Version: 1.9
+Date: 2013-09-18
 Author: Alberto Pettarin (alberto AT albertopettarin DOT it)
 Description: this JS provides Media Overlay (SMIL) support for EPUB 3 reflowable eBooks
 
@@ -98,6 +98,7 @@ Fragment IDs might be arbitrary (but unique) strings.
     associated_events: ['click', 'touchend'],
     ignore_taps_on_a_elements: true,
     allowed_reading_systems: ['ALL'],
+    hide_elements: [],
     // END parameters
 
     // BEGIN fields
@@ -171,6 +172,11 @@ Fragment IDs might be arbitrary (but unique) strings.
             Default value: ['ALL']
             Description: execute SMIL emulation only if navigator.epubReadingSystem.name (lower-cased) is listed here (e.g., 'ibooks', 'readium');
                          set to 'ALL' to allow any reading system (even if it does not expose navigator.epubReadingSystem)
+        * hide_elements 
+            Type: array of strings
+            Default value: []
+            Description: set display:none for the DOM elements listed, useful for hiding e.g. an <audio> element on page
+            WARNING: this feature is enabled on iBooks only: on other Reading Systems it has no effect
     */
     init: function(audio_file, parameters) {
       var rb_smil_emulator = window.rb_smil_emulator;
@@ -212,6 +218,9 @@ Fragment IDs might be arbitrary (but unique) strings.
       if ("allowed_reading_systems" in parameters) {
         rb_smil_emulator.allowed_reading_systems = parameters["allowed_reading_systems"];
       }
+      if ("hide_elements" in parameters) {
+        rb_smil_emulator.hide_elements = parameters["hide_elements"];
+      }
 
       // check that the current reading system is allowed: if not, abort
       var abort = true;
@@ -244,6 +253,16 @@ Fragment IDs might be arbitrary (but unique) strings.
       // add listener to catch touch events
       for (var i = 0; i < rb_smil_emulator.associated_events.length; ++i) {
         doc.addEventListener(rb_smil_emulator.associated_events[i], rb_smil_emulator.on_touch_event);
+      }
+
+      // hide elements
+      if (rb_smil_emulator.current_reading_system == "ibooks") {
+        for (var i = 0; i < rb_smil_emulator.hide_elements.length; ++i) {
+          var el = doc.getElementById(rb_smil_emulator.hide_elements[i]);
+          if (el) {
+            el.style.display = 'none';   
+          }
+        }
       }
 
       // if autostart_audio, start audio at first fragment
