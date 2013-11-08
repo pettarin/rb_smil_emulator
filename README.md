@@ -3,8 +3,8 @@
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
-* Version: 1.9
-* Date: 2013-09-19
+* Version: 1.10
+* Date: 2013-11-08
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
@@ -122,6 +122,7 @@ Two full Audio-eBook examples can be found online at [Smuuks web site](http://ww
 * Thanks to _Giulio Cesare Solaroli_ for a useful discussion about JS
 * Thanks to _torazaburo_ for answering my question about [how to make iBook turn page with JS](http://stackoverflow.com/questions/16922631/make-ibooks-turn-page-in-reflow-mode-with-javascript-embedded-in-the-displayed)
 * Thanks to _Frank Chen_ for providing a sample JS code incorporated into the current code for the autoturnpage option
+* Thanks to _Dirk_ for spotting a problem with applying/removing CSS via classList
 
 Please feel free to send me your feedback about this project
 (my email address can be found in the source code header),

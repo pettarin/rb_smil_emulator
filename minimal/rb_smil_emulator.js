@@ -1,8 +1,8 @@
 /*
 
 File name: rb_smil_emulator.js
-Version: 1.9
-Date: 2013-09-18
+Version: 1.10
+Date: 2013-11-08
 Author: Alberto Pettarin (alberto AT albertopettarin DOT it)
 Description: this JS provides Media Overlay (SMIL) support for EPUB 3 reflowable eBooks
 
@@ -436,27 +436,38 @@ Fragment IDs might be arbitrary (but unique) strings.
     apply_active_class: function() {
       var rb_smil_emulator = window.rb_smil_emulator;
       var idx = rb_smil_emulator.current_idx;
-      var active_fragment = doc.getElementById(rb_smil_emulator.smil_ids[idx]);
-      active_fragment.classList.remove(rb_smil_emulator.paused_fragment_class_name);
-      active_fragment.classList.add(rb_smil_emulator.active_fragment_class_name);
+      if (idx >= 0) {
+        var active_fragment = doc.getElementById(rb_smil_emulator.smil_ids[idx]);
+        if (active_fragment) {
+          active_fragment.classList.remove(rb_smil_emulator.paused_fragment_class_name);
+          active_fragment.classList.add(rb_smil_emulator.active_fragment_class_name);
+        }
+      }
     },
 
     // apply paused class to the current fragment
     apply_paused_class: function() {
       var rb_smil_emulator = window.rb_smil_emulator;
       var idx = rb_smil_emulator.current_idx;
-      var active_fragment = doc.getElementById(rb_smil_emulator.smil_ids[idx]);
-      active_fragment.classList.remove(rb_smil_emulator.active_fragment_class_name);
-      active_fragment.classList.add(rb_smil_emulator.paused_fragment_class_name);
+      if (idx >= 0) {
+        var active_fragment = doc.getElementById(rb_smil_emulator.smil_ids[idx]);
+        if (active_fragment) {
+          active_fragment.classList.remove(rb_smil_emulator.active_fragment_class_name);
+          active_fragment.classList.add(rb_smil_emulator.paused_fragment_class_name);
+        }
+      }
     },
 
     // remove active/paused class from the current fragment, if any
     apply_stop_class: function() {
-      var idx = window.rb_smil_emulator.current_idx;
+      var rb_smil_emulator = window.rb_smil_emulator;
+      var idx = rb_smil_emulator.current_idx;
       if (idx >= 0) {
         var active_fragment = doc.getElementById(rb_smil_emulator.smil_ids[idx]);
-        active_fragment.classList.remove(rb_smil_emulator.paused_fragment_class_name);
-        active_fragment.classList.remove(rb_smil_emulator.active_fragment_class_name);
+        if (active_fragment) {
+          active_fragment.classList.remove(rb_smil_emulator.paused_fragment_class_name);
+          active_fragment.classList.remove(rb_smil_emulator.active_fragment_class_name);
+        }
       }
     },
 
