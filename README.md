@@ -100,7 +100,7 @@ Please see the `src/` directory.
 
 A minimal (but working) example can be found in the `minimal/` directory.
 
-Two full Audio-eBook examples can be found online at [ReadBeyond's Menestrello web site](https://readbeyond.it/menestrello/):
+Two full Audio-eBook examples can be found online at [ReadBeyond's Menestrello web site](https://readbeyond.it/menestrello/#download):
 * _The Curious Case of Benjamin Button_, by F. Scott Fitzgerald, in English, 1h audio/1.2K SMIL phrase-level fragments
 * _The Camel's Back_, by F. Scott Fitzgerald, in English, 1h audio/1.3K SMIL SMIL phrase-level fragments
 * _Divina Commedia_, by Dante Alighieri, in Italian, 12h audio/14K SMIL verse-level fragments
