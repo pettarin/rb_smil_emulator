@@ -100,9 +100,10 @@ Please see the `src/` directory.
 
 A minimal (but working) example can be found in the `minimal/` directory.
 
-Two full Audio-eBook examples can be found online at [Smuuks web site](http://www.smuuks.it/index.php/en/):
-* _The Curious Case of Benjamin Button_, by F. Scott Fitzgerald, in English, 1h audio/645 SMIL phrase-level fragments: [here](http://www.smuuks.it/index.php/en/projects/the-curious-case-of-benjamin-button)
-* _Divina Commedia_, by Dante Alighieri, in Italian, 14h audio/14K SMIL verse-level fragments: [here](http://www.smuuks.it/index.php/en/projects/divine-comedy-read-prof-lino-pertile).
+Two full Audio-eBook examples can be found online at [ReadBeyond's Menestrello web site](https://readbeyond.it/menestrello/):
+* _The Curious Case of Benjamin Button_, by F. Scott Fitzgerald, in English, 1h audio/1.2K SMIL phrase-level fragments
+* _The Camel's Back_, by F. Scott Fitzgerald, in English, 1h audio/1.3K SMIL SMIL phrase-level fragments
+* _Divina Commedia_, by Dante Alighieri, in Italian, 12h audio/14K SMIL verse-level fragments
 
 
 ## TODO List
