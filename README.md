@@ -3,8 +3,8 @@
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
-* Version: 1.10
-* Date: 2013-11-08
+* Version: 1.11
+* Date: 2014-02-12
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
@@ -100,10 +100,8 @@ Please see the `src/` directory.
 
 A minimal (but working) example can be found in the `minimal/` directory.
 
-Three full, regular EPUB3 Audio-eBook samples can be found online at [ReadBeyond's Menestrello web site](https://readbeyond.it/menestrello/#download):
-* _The Curious Case of Benjamin Button_, by F. Scott Fitzgerald, in English, 1h audio/1.2K SMIL phrase-level fragments
-* _The Camel's Back_, by F. Scott Fitzgerald, in English, 1h audio/1.3K SMIL SMIL phrase-level fragments
-* _Divina Commedia_, by Dante Alighieri, in Italian, 12h audio/14K SMIL verse-level fragments
+Several full, regular EPUB3 Audio-eBook samples can be freely downloaded
+from [ReadBeyond Web Site](https://readbeyond.it/ebooks.html).
 
 
 ## TODO List
@@ -124,6 +122,7 @@ Three full, regular EPUB3 Audio-eBook samples can be found online at [ReadBeyond
 * Thanks to _torazaburo_ for answering my question about [how to make iBook turn page with JS](http://stackoverflow.com/questions/16922631/make-ibooks-turn-page-in-reflow-mode-with-javascript-embedded-in-the-displayed)
 * Thanks to _Frank Chen_ for providing a sample JS code incorporated into the current code for the autoturnpage option
 * Thanks to _Dirk_ for spotting a problem with applying/removing CSS via classList
+* Thanks to _Daniel Weck_ for providing the code for detecting the new Readium platform.
 
 Please feel free to send me your feedback about this project
 (my email address can be found in the source code header),

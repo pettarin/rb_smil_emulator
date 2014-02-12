@@ -1,8 +1,8 @@
 /*
 
 File name: rb_smil_emulator.js
-Version: 1.10
-Date: 2013-11-08
+Version: 1.11
+Date: 2014-02-12
 Author: Alberto Pettarin (alberto AT albertopettarin DOT it)
 Description: this JS provides Media Overlay (SMIL) support for EPUB 3 reflowable eBooks
 
@@ -172,6 +172,7 @@ Fragment IDs might be arbitrary (but unique) strings.
             Default value: ['ALL']
             Description: execute SMIL emulation only if navigator.epubReadingSystem.name (lower-cased) is listed here (e.g., 'ibooks', 'readium');
                          set to 'ALL' to allow any reading system (even if it does not expose navigator.epubReadingSystem)
+            WARNING: this JS is never executed when run in Readium, even when 'ALL' is specified (see line ~244)
         * hide_elements 
             Type: array of strings
             Default value: []
@@ -222,11 +223,31 @@ Fragment IDs might be arbitrary (but unique) strings.
         rb_smil_emulator.hide_elements = parameters["hide_elements"];
       }
 
-      // check that the current reading system is allowed: if not, abort
-      var abort = true;
+      // try determining the current reading system
       if ((navigator) && (navigator.epubReadingSystem) && (navigator.epubReadingSystem.name)) {
         rb_smil_emulator.current_reading_system = navigator.epubReadingSystem.name.toLowerCase();
+      } else {
+        // detect new Readium
+        // code courtesy of Daniel Weck
+        // see https://github.com/pettarin/rb_smil_emulator/issues/2
+        try {
+          if ((window.LauncherUI) || ((window.parent) && (window.parent !== window) && (window.parent.ReadiumSDK))) {
+            rb_smil_emulator.current_reading_system = "readium";
+          }
+        } catch (e) {
+          // something went wrong
+          // cross origin iframe parent access?
+          // console.error(e);
+        }
       }
+
+      // never execute when run in Readium
+      if (rb_smil_emulator.current_reading_system == "readium") {
+        return false;
+      }
+
+      // check whether the current reading system is allowed: if not, abort
+      var abort = true;
       for (var i = 0; i < rb_smil_emulator.allowed_reading_systems.length; ++i) {
         var ars = rb_smil_emulator.allowed_reading_systems[i];
         if ((ars == 'ALL') || (ars == rb_smil_emulator.current_reading_system)) {
