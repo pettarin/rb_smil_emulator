@@ -3,8 +3,8 @@
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
-* Version: 1.11
-* Date: 2014-02-12
+* Version: 1.12
+* Date: 2014-05-20
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: The MIT License (MIT), see LICENSE.md
 
@@ -122,7 +122,7 @@ from [ReadBeyond Web Site](https://readbeyond.it/ebooks.html).
 * Thanks to _torazaburo_ for answering my question about [how to make iBook turn page with JS](http://stackoverflow.com/questions/16922631/make-ibooks-turn-page-in-reflow-mode-with-javascript-embedded-in-the-displayed)
 * Thanks to _Frank Chen_ for providing a sample JS code incorporated into the current code for the autoturnpage option
 * Thanks to _Dirk_ for spotting a problem with applying/removing CSS via classList
-* Thanks to _Daniel Weck_ for providing the code for detecting the new Readium platform.
+* Thanks to _Daniel Weck_ for providing the code for detecting the new Readium platform and iBooks for Mac OS X.
 
 Please feel free to send me your feedback about this project
 (my email address can be found in the source code header),

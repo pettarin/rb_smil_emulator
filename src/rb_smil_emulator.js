@@ -1,8 +1,8 @@
 /*
 
 File name: rb_smil_emulator.js
-Version: 1.11
-Date: 2014-02-12
+Version: 1.12
+Date: 2014-05-20
 Author: Alberto Pettarin (alberto AT albertopettarin DOT it)
 Description: this JS provides Media Overlay (SMIL) support for EPUB 3 reflowable eBooks
 
@@ -172,7 +172,7 @@ Fragment IDs might be arbitrary (but unique) strings.
             Default value: ['ALL']
             Description: execute SMIL emulation only if navigator.epubReadingSystem.name (lower-cased) is listed here (e.g., 'ibooks', 'readium');
                          set to 'ALL' to allow any reading system (even if it does not expose navigator.epubReadingSystem)
-            WARNING: this JS is never executed when run in Readium, even when 'ALL' is specified (see line ~244)
+            WARNING: this JS is never executed when run in Readium, even when 'ALL' is specified (see line 257)
         * hide_elements 
             Type: array of strings
             Default value: []
@@ -237,6 +237,19 @@ Fragment IDs might be arbitrary (but unique) strings.
         } catch (e) {
           // something went wrong
           // cross origin iframe parent access?
+          // console.error(e);
+        }
+
+        // detect iBooks for Mac OS X
+        try {
+          // code courtesy of Daniel Weck
+          // see https://twitter.com/DanielWeck/status/412669371161784321
+          // see https://twitter.com/acutebit/status/412679039153762304
+          if (window.iBooks || (window.location.href && window.location.href.toLowerCase().indexOf("com.apple.bkagentservice") >= 0)) {
+            rb_smil_emulator.current_reading_system = "ibooks";
+          }
+        } catch (e) {
+          // something went wrong
           // console.error(e);
         }
       }
@@ -416,8 +429,6 @@ Fragment IDs might be arbitrary (but unique) strings.
           var previous_fragment_page = Math.floor(rb_smil_emulator.previous_fragment_offsetTop / window.innerHeight);
 
           var orientation = window.orientation;
-          var left = doc.getElementById(rb_smil_emulator.smil_ids[idx]).getBoundingClientRect().left;
-          var right = doc.getElementById(rb_smil_emulator.smil_ids[idx]).getBoundingClientRect().right;
 
           if (previous_fragment_page > -1) {
             if ((orientation == 0) || (orientation == 180)) {
@@ -427,8 +438,10 @@ Fragment IDs might be arbitrary (but unique) strings.
               }
             } else {
               // landscape
-              if ((left > window.innerWidth) && (right> window.innerWidth)) {
-                location.href = "#" + rb_smil_emulator.smil_ids[idx];
+              if (current_fragment_page > previous_fragment_page) {
+                if (current_fragment_page % 2 == 1) {
+                    location.href = "#" + rb_smil_emulator.smil_ids[idx];
+                }
               }
             }
           }
