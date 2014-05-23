@@ -20,9 +20,8 @@ If you think that tap-to-play is a useful feature,
 I request you to urge the developers of your favourite reading system to implement
 the official EPUB 3 Media Overlay specification.
 
-Although primarily developed for iBooks, it works in Readium
-(to which it adds the still not implemented tap-to-play function)
-and in modern browsers (e.g., Chrome) as well.
+Although primarily developed for iBooks,
+it works in modern browsers (e.g., Chrome) as well.
 
 
 ## Usage
