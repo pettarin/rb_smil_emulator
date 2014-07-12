@@ -127,4 +127,4 @@ Please feel free to send me your feedback about this project
 (my email address can be found in the source code header),
 and/or fork and improve it!
 
-[![Analytics](https://ga-beacon.appspot.com/UA-52776738-1/rb_smil_emulator](http://www.albertopettarin.it)
+[![Analytics](https://ga-beacon.appspot.com/UA-52776738-1/rb_smil_emulator)](http://www.albertopettarin.it)
