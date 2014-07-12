@@ -6,7 +6,7 @@
 * Version: 1.12
 * Date: 2014-05-20
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
-* License: The MIT License (MIT), see LICENSE.md
+* License: the MIT License (MIT), see LICENSE.md
 
 This JavaScript enables the tap-to-play function on those platforms
 that do not properly support the EPUB 3 Media Overlay specification
