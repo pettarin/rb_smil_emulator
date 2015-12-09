@@ -1,5 +1,31 @@
 # rb_smil_emulator.js 
 
+
+## VERY IMPORTANT NOTICE (2015-12-09)
+
+`rb_smil_emulator` is now **deprecated**.
+
+**Do not use it in production.**
+
+Please note that I **removed** this JS script from the free EPUB 3 Audio-eBooks
+hosted at [ReadBeyond](http://readbeyond.it/ebooks.html).
+
+Now I think that providing this **workaround**
+for reading applications that lack support
+for EPUB 3 Media Overlays (MO) in reflowable rendition
+(e.g., iBooks) has been a **bad move**.
+
+In fact, it has not promoted reading app developers to fill their gaps,
+and it has given the end users a false perception
+about the MO support of their reading application.
+
+I hope readers will start **caring** more about **adherence to open formats**,
+and thus they will start **asking their app developers to comply** with them.
+
+To summarize, I will no longer update the code in this repository,
+and I strongly urge any developer who forked it to follow suit.
+
+
 ## Abstract
 
 * File name: `rb_smil_emulator.js`
@@ -8,7 +34,7 @@
 * Author: Alberto Pettarin ([website](http://www.albertopettarin.it/), [contact information](http://www.albertopettarin.it/contact.html))
 * License: the MIT License (MIT), see LICENSE
 
-This JavaScript enables the tap-to-play function on those platforms
+This Javascript file enables the tap-to-play function on those platforms
 that do not properly support the EPUB 3 Media Overlay specification
 (most notably, Apple iBooks).
 
@@ -100,7 +126,7 @@ Please see the `src/` directory.
 A minimal (but working) example can be found in the `minimal/` directory.
 
 Several full, regular EPUB3 Audio-eBook samples can be freely downloaded
-from [ReadBeyond Web Site](https://readbeyond.it/ebooks.html).
+from [ReadBeyond Web Site](http://readbeyond.it/ebooks.html).
 
 
 ## Limitations and Missing Features
@@ -127,4 +153,3 @@ Please feel free to send me your feedback about this project
 (my email address can be found in the source code header),
 and/or fork and improve it!
 
-[![Analytics](https://ga-beacon.appspot.com/UA-52776738-1/rb_smil_emulator)](http://www.albertopettarin.it)
